@@ -21,9 +21,9 @@ export default function ProductForm({
 }: ProductFormProps) {
   const [formData, setFormData] = useState<Omit<Product, "id">>({
     name: "",
-    price: "",
+    price: 0,
     category: "",
-    stock: "",
+    stock: 0,
   });
 
   useEffect(() => {
