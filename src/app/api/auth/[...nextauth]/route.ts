@@ -29,11 +29,11 @@ async authorize(credentials) {
   );
 
   if (user) {
-    console.log("✅ User authenticated:", user);
+    console.log(" User authenticated:", user);
     return { id: user.id, name: user.name, email: user.email };
   }
 
-  console.error("❌ Invalid login attempt:", credentials);
+  console.error(" Invalid login attempt:", credentials);
   return null;
 }
 
