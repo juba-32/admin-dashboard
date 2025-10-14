@@ -11,8 +11,8 @@ const handler = NextAuth({
       },
       async authorize(credentials: Record<string, string> | undefined) {
         const users = [
-          { id: 1, name: "Admin", email: "admin@example.com", password: "1234" },
-          { id: 2, name: "User", email: "user@example.com", password: "1234" },
+          { id: "1", name: "Admin", email: "admin@example.com", password: "1234" },
+          { id: "2", name: "User", email: "user@example.com", password: "1234" },
         ];
 
         const user = users.find(
@@ -21,7 +21,9 @@ const handler = NextAuth({
             u.password === credentials?.password
         );
 
-        if (user) return user;
+        if (user) {
+          return { id: user.id, name: user.name, email: user.email };
+        }
         return null;
       },
     }),
