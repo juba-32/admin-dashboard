@@ -9,9 +9,11 @@ const handler = NextAuth({
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-  async authorize(credentials) {
+async authorize(credentials) {
+  console.log("Received credentials:", credentials);
+
   if (!credentials?.email || !credentials?.password) {
-    console.error("Missing credentials:", credentials);
+    console.error("Missing credentials");
     return null;
   }
 
@@ -22,20 +24,16 @@ const handler = NextAuth({
 
   const user = users.find(
     (u) =>
-      u.email === credentials.email.trim() &&
+      u.email.toLowerCase() === credentials.email.toLowerCase().trim() &&
       u.password === credentials.password.trim()
   );
 
   if (user) {
-    console.log("✅ Authenticated:", user.email);
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    };
+    console.log("✅ User authenticated:", user);
+    return { id: user.id, name: user.name, email: user.email };
   }
 
-  console.error("❌ Invalid credentials:", credentials.email);
+  console.error("❌ Invalid login attempt:", credentials);
   return null;
 }
 
