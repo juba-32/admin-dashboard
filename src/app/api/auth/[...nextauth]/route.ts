@@ -10,10 +10,10 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("Received credentials:", credentials);
+        console.log("🔹 Received credentials:", credentials);
 
         if (!credentials?.email || !credentials?.password) {
-          console.error("Missing credentials");
+          console.error("❌ Missing credentials");
           return null;
         }
 
@@ -29,14 +29,13 @@ const handler = NextAuth({
         );
 
         if (user) {
-          console.log(" User authenticated:", user);
+          console.log("✅ User authenticated:", user);
           return { id: user.id, name: user.name, email: user.email };
         }
 
-        console.error(" Invalid login attempt:", credentials);
+        console.error("❌ Invalid login attempt for:", credentials.email);
         return null;
-      }
-
+      },
     }),
   ],
   pages: {
