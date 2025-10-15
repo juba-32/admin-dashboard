@@ -15,6 +15,7 @@ export default function LoginPage() {
       redirect: false,
       email,
       password,
+      callbackUrl: "https://admin-dashboard-1zeu.vercel.app"
     });
 
     if (res?.ok) router.push("/dashboard/users");

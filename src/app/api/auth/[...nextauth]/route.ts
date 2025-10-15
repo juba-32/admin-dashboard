@@ -9,33 +9,33 @@ const handler = NextAuth({
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-async authorize(credentials) {
-  console.log("Received credentials:", credentials);
+      async authorize(credentials) {
+        console.log("Received credentials:", credentials);
 
-  if (!credentials?.email || !credentials?.password) {
-    console.error("Missing credentials");
-    return null;
-  }
+        if (!credentials?.email || !credentials?.password) {
+          console.error("Missing credentials");
+          return null;
+        }
 
-  const users = [
-    { id: "1", name: "Admin", email: "admin@example.com", password: "1234" },
-    { id: "2", name: "User", email: "user@example.com", password: "1234" },
-  ];
+        const users = [
+          { id: "1", name: "Admin", email: "admin@example.com", password: "1234" },
+          { id: "2", name: "User", email: "user@example.com", password: "1234" },
+        ];
 
-  const user = users.find(
-    (u) =>
-      u.email.toLowerCase() === credentials.email.toLowerCase().trim() &&
-      u.password === credentials.password.trim()
-  );
+        const user = users.find(
+          (u) =>
+            u.email.toLowerCase() === credentials.email.toLowerCase().trim() &&
+            u.password === credentials.password.trim()
+        );
 
-  if (user) {
-    console.log(" User authenticated:", user);
-    return { id: user.id, name: user.name, email: user.email };
-  }
+        if (user) {
+          console.log(" User authenticated:", user);
+          return { id: user.id, name: user.name, email: user.email };
+        }
 
-  console.error(" Invalid login attempt:", credentials);
-  return null;
-}
+        console.error(" Invalid login attempt:", credentials);
+        return null;
+      }
 
     }),
   ],
